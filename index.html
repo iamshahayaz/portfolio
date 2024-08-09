@@ -29,7 +29,9 @@
                     <li class="nav__item"><a href="#about" class="nav__link">About</a></li>
                     <li class="nav__item"><a href="#skills" class="nav__link">Skills</a></li>
                     <li class="nav__item">
-                        <a href="./assets/img/AYAZ.jpg" target="_blank" class="nav__link">Projects</a>
+<!--                         <a href="./assets/img/AYAZ.jpg" target="_blank" class="nav__link">Projects</a> -->
+                        <a id="projectsLink" href="#" target="_blank" class="nav__link">Projects</a>
+
                     </li>
                     <li class="nav__item">
                         <a href="#contact" class="nav__link">Contact</a>
@@ -257,6 +259,13 @@
 
     <!--===== MAIN JS =====-->
     <script src="assets/js/main.js"></script>
+    <script>
+     document.addEventListener("DOMContentLoaded", function() {
+    var link = document.getElementById('projectsLink');
+     link.href = './assets/img/AYAZ.jpg';
+   });
+   </script>
+
 </body>
 
 </html>
