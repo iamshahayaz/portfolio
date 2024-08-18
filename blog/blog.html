@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>blog</title>
+    <link rel="stylesheet" href="blog.css">
+</head>
+
+<body>
+    <header>
+        <h1>The Tech</h1>
+        <nav>
+            <ul>
+                <li><a href="https://shahayaz.tech/#home">Home</a></li>
+                <li><a href="https://shahayaz.tech/#about">About</a></li>
+                <a href="tel:+916005605757" class="con">Contact</a></li>
+
+
+            </ul>
+        </nav>
+    </header>
+
+    <div class="container">
+        <main>
+            
+            <section id="weather-section">
+                <h3>Current Weather</h3>
+                <hr>
+                <div id="weather-info">
+                    <!-- Weather information will be inserted here -->
+                </div>
+                <h3>Hourly Forecast</h3>
+                <div id="hourly-forecast">
+                    <!-- Hourly forecast will be inserted here -->
+                </div>
+                <h3>Weather Alerts</h3>
+                <div id="weather-alerts">
+                    <!-- Weather alerts will be inserted here -->
+                </div>
+                <h3>UV Index</h3>
+                <div id="uv-index">
+                    <!-- UV Index will be inserted here -->
+                </div>
+                <h3>Sunrise and Sunset Times</h3>
+                <div id="sun-times">
+                    <!-- Sunrise and sunset times will be inserted here -->
+                </div>
+            </section>
+            
+            <article>
+                <hr>
+                <h2>Latest</h2>
+                <p>By <strong>Ayuu shah</strong> | <span id="post-date"></span></p>
+                <img src="image.jpg" alt="Sample Image">
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus imperdiet...</p>
+                <p>Read more... Lorem ipsum dolor, sit amet consectetur adipisicing elit. Illum amet sapiente recusandae
+                dolores debitis aliquam. Unde, necessitatibus sed est odio ea voluptas quia corporis, consectetur
+                nemo, magnam consequuntur adipisci et?
+                </p>
+            </article>
+        </main>
+        <aside>
+            <h3>Recent Posts</h3>
+            <ul>
+                <li><a href="#">Post 1</a></li>
+                <li><a href="#">Post 2</a></li>
+                <li><a href="#">Post 3</a></li>
+            </ul>
+        </aside>
+    </div>
+
+    <footer>
+        <p>Contact me at: shahayaz339@gmail.com</p>
+        <p>Follow me on <a href="#">Twitter</a> | <a href="#">Facebook</a></p>
+        <p>&copy; 2024 My Simple Blog</p>
+    </footer>
+    <script>
+
+
+        function todaysdate() {
+            const today = new Date();
+            const month = today.toLocaleString('default', { month: 'long' });
+            const day = today.getDate();
+            const year = today.getFullYear();
+            const formattedDate = `${month} ${day}, ${year}`;
+            const hours = today.getHours();
+            const minutes = today.getMinutes();
+            const seconds = today.getSeconds();
+            const ampm = hours >= 12 ? 'PM' : 'AM';
+            const formattedHours = hours % 12 || 12;
+            const formattedMinutes = minutes < 10 ? `0${minutes}` : minutes;
+            const formattedSeconds = seconds < 10 ? `0${seconds}` : seconds;
+            const formattedTime = `${formattedHours}:${formattedMinutes}:${formattedSeconds} ${ampm}`;
+            return `${formattedDate} ${formattedTime}`;
+        }
+
+        const datenow = todaysdate();
+        document.getElementById('post-date').textContent = datenow;
+
+    </script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Function to fetch weather data
+            function fetchWeather() {
+                const apiKey = 'd5ee6d9ca4eb22cf6211b04e54877d89'; // Replace with your OpenWeatherMap API key
+                const city = 'Srinagar'; // Replace with your desired city
+                const units = 'metric'; // Use 'imperial' for Fahrenheit
+                const url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=${units}&appid=${apiKey}`;
+    
+                fetch(url)
+                    .then(response => response.json())
+                    .then(data => {
+                        const temperature = data.main.temp;
+                        const weatherDescription = data.weather[0].description;
+                        const weatherHTML = `
+                            <p>Temperature: ${temperature}°C</p>
+                            <p>Condition: ${weatherDescription}</p>
+                        `;
+                        document.getElementById('weather-info').innerHTML = weatherHTML;
+                    })
+                    .catch(error => {
+                        console.error('Error fetching weather data:', error);
+                        document.getElementById('weather-info').innerHTML = '<p>Unable to fetch weather data at the moment.</p>';
+                    });
+            }
+    
+            // Fetch weather data when the page loads
+            fetchWeather();
+        });
+    </script>
+    
+   <script src="blog.js"></script>
+
+</body>
+
+</html>
